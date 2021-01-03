@@ -1,0 +1,13 @@
+package com.chris.question.gateway;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class QuestionGatewayApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
