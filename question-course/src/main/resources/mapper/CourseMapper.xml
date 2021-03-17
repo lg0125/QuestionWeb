@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.CourseMapper">
+    <resultMap id="CourseMap" type="com.chris.question.course.pojo.Course">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="content" column="content" />
+        <result property="picture" column="picture" />
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <association property="courseType" column="course_type_id"
+                     select="com.chris.question.course.dao.CourseTypeMapper.getCourseType" />
+        <association property="grade" column="grade_id"
+                     select="com.chris.question.course.dao.GradeMapper.getGrade" />
+    </resultMap>
+
+    <insert id="insertCourse" parameterType="com.chris.question.course.pojo.Course">
+        INSERT INTO course (id, name, course_type_id, content,grade_id)
+        VALUES (#{id},#{name},#{courseTypeId},#{content},#{gradeId})
+    </insert>
+
+    <delete id="deleteCourse" parameterType="String">
+        UPDATE course SET del=0 WHERE id=#{id}
+    </delete>
+
+    <update id="updateCourse" parameterType="com.chris.question.course.pojo.Course">
+        UPDATE course
+        SET name=#{name},course_type_id=#{courseTypeId},content=#{content},grade_id=#{gradeId}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getCourse" parameterType="String" resultMap="CourseMap">
+        SELECT * FROM course WHERE id=#{id} AND del=1
+    </select>
+
+    <select id="getCourseListByGradeId" parameterType="Long" resultMap="CourseMap">
+        SELECT * FROM course WHERE grade_id=#{gradeId} AND del=1
+    </select>
+
+    <select id="getCourseListByCourseTypeId" parameterType="String" resultMap="CourseMap">
+        SELECT  * FROM course WHERE course_type_id=#{courseTypeId} AND del=1
+    </select>
+
+    <select id="getCourseList" resultMap="CourseMap">
+        SELECT  * FROM course WHERE  del=1
+    </select>
+
+    <select id="getCourseListByPage" resultMap="CourseMap">
+        SELECT  * FROM course WHERE  del=1
+    </select>
+
+</mapper>

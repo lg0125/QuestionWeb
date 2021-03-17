@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.QuestionMapper">
+    <resultMap id="QuestionMap" type="com.chris.question.course.pojo.Question">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="points" column="points"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="photo1" column="photo1"/>
+        <result property="photo2" column="photo2"/>
+        <result property="photo3" column="photo3"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <!-- <association property="course" column="course_id"
+                     select="com.chris.question.course.dao.CourseMapper.getCourse" /> -->
+        <association property="winner" column="id"
+                     select="com.chris.question.course.dao.WinnerMapper.getWinner" />
+    </resultMap>
+
+    <resultMap id="QuestionSimpleMap" type="com.chris.question.course.pojo.Question" >
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="points" column="points"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="courseId" column="course_id" />
+        <result property="photo1" column="photo1"/>
+        <result property="photo2" column="photo2"/>
+        <result property="photo3" column="photo3"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertQuestion" parameterType="com.chris.question.course.pojo.Question"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO question (course_id, user_id, points, title, content,photo1,photo2,photo3)
+        VALUES (#{courseId},#{userId},#{points},#{title},#{content},#{photo1},#{photo2},#{photo3})
+    </insert>
+
+    <delete id="deleteQuestion" parameterType="Long">
+        UPDATE question SET del=0
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateQuestion" parameterType="com.chris.question.course.pojo.Question">
+        UPDATE question
+        SET course_id=#{courseId},user_id=#{userId},points=#{points},title=#{title},content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getQuestion" parameterType="Long" resultMap="QuestionMap">
+        SELECT * FROM question WHERE id=#{id} and del=1
+    </select>
+
+    <select id="getQuestionListByCourseId" parameterType="String" resultMap="QuestionMap">
+        SELECT * FROM question WHERE course_id=#{courseId} AND del=1
+    </select>
+</mapper>

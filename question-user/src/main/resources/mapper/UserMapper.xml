@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.user.dao.UserMapper">
+    <resultMap id="UserMap" type="com.chris.question.user.pojo.User">
+        <id property="id" column="id" />
+        <result property="password" column="password"/>
+        <result property="memberId" column="member_id"/>
+        <result property="cardId" column="card_id"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <association property="information" column="id"
+                     select="com.chris.question.user.dao.InformationMapper.getInformation" />
+        <association property="points" column="id"
+                     select="com.chris.question.user.dao.PointsMapper.getPoints" />
+
+        <collection property="activityIndexList" column="id"
+                    select="com.chris.question.user.dao.ActivityMapper.getActivityListByUserId" />
+        <collection property="collectIndexList" column="id"
+                    select="com.chris.question.user.dao.CollectMapper.getCollectListByUserId" />
+        <collection property="forwardIndexList" column="id"
+                    select="com.chris.question.user.dao.ForwardMapper.getForwardListByUserId" />
+        <collection property="blogList" column="id"
+                    select="com.chris.question.user.dao.BlogMapper.getBlogListByUserId" />
+    </resultMap>
+
+
+    <select id="getUser" parameterType="String" resultMap="UserMap">
+        SELECT id,password,member_id,card_id FROM user WHERE id=#{id} AND del=1
+    </select>
+
+    <insert id="insertUser" parameterType="com.chris.question.user.dto.UserDto">
+        INSERT INTO user (id, password, member_id, card_id)
+        VALUES (#{id},#{password},#{memberId},#{cardId})
+    </insert>
+
+    <update id="updateUser" parameterType="com.chris.question.user.dto.UserDto">
+        UPDATE user
+        SET password=#{password},card_id=#{cardId},member_id=#{memberId}
+        WHERE id=#{id}
+    </update>
+
+</mapper>

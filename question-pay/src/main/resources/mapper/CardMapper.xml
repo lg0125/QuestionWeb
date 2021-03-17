@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.pay.dao.CardMapper">
+    <resultMap id="CardMap" type="com.chris.question.pay.pojo.Card">
+        <id property="id" column="id"/>
+        <result property="money" column="money"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertCard" parameterType="com.chris.question.pay.pojo.Card">
+        INSERT INTO card (id,money) VALUES (#{id},#{money})
+    </insert>
+
+    <delete id="deleteCard" parameterType="String">
+        UPDATE card SET del=0 WHERE id=#{id}
+    </delete>
+
+    <update id="updateCard" parameterType="com.chris.question.pay.pojo.Card">
+        UPDATE card SET money=#{money}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getCard" parameterType="String" resultMap="CardMap">
+        SELECT * FROM card WHERE id=#{id}
+    </select>
+
+</mapper>

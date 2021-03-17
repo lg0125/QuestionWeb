@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.CourseTypeMapper">
+    <resultMap id="CourseTypeMap" type="com.chris.question.course.pojo.CourseType">
+        <id property="id" column="id"/>
+        <result property="courseTypeName" column="course_type_name"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertCourseType" parameterType="com.chris.question.course.pojo.CourseType"
+        useGeneratedKeys="true" keyProperty="courseTypeOrder">
+        INSERT INTO coursetype (id, name)
+        VALUES (#{id},#{name})
+    </insert>
+
+    <delete id="deleteCourseType" parameterType="String">
+        UPDATE coursetype SET del=0
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateCourseType" parameterType="com.chris.question.course.pojo.CourseType">
+        UPDATE coursetype SET name=#{name}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getCourseType" parameterType="String" resultMap="CourseTypeMap">
+        SELECT * FROM coursetype WHERE id=#{id} and del=1
+    </select>
+
+    <select id="getCourseTypeList" resultMap="CourseTypeMap">
+        SELECT * FROM coursetype WHERE del=1
+    </select>
+
+</mapper>

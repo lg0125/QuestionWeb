@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.WinnerMapper">
+    <resultMap id="WinnerMap" type="com.chris.question.course.pojo.Winner">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="questionId" column="questionId" />
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertWinner" parameterType="com.chris.question.course.pojo.Winner"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO winner (question_id, user_id) VALUES (#{questionId},#{userId})
+    </insert>
+
+    <select id="getWinner" parameterType="Long" resultMap="WinnerMap">
+        SELECT * FROM winner WHERE question_id=#{questionId}
+    </select>
+
+</mapper>

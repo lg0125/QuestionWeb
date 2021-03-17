@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.user.dao.CollectMapper">
+    <resultMap id="CollectMap" type="com.chris.question.user.pojo.Collect">
+        <id property="id" column="id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="userId" column="user_id"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertCollect" parameterType="com.chris.question.user.pojo.Collect"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO collect (question_id,user_id)
+        VALUES (#{questionId},#{userId})
+    </insert>
+
+    <delete id="deleteCollect" parameterType="Long">
+        UPDATE collect SET del=0
+        WHERE id=#{id}
+    </delete>
+
+    <select id="getCollect" parameterType="Long" resultMap="CollectMap">
+        SELECT * FROM collect WHERE del=1 and id=#{id}
+    </select>
+
+    <select id="getCollectListByUserId" parameterType="String" resultMap="CollectMap">
+        SELECT * FROM collect WHERE user_id=#{userId} AND del=1
+        ORDER BY create_date DESC
+    </select>
+
+</mapper>

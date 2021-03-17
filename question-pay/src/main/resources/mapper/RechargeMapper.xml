@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.pay.dao.RechargeMapper">
+    <resultMap id="RechargeMap" type="com.chris.question.pay.pojo.Recharge">
+        <id property="id" column="id"/>
+        <result property="money" column="money"/>
+        <result property="cardId" column="card_id"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertRecharge" parameterType="com.chris.question.pay.pojo.Recharge"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recharge (money, card_id)
+        VALUES (#{money},#{cardId})
+    </insert>
+
+    <select id="getRecharge" parameterType="Long" resultMap="RechargeMap">
+        SELECT * FROM recharge WHERE id=#{id}
+    </select>
+</mapper>

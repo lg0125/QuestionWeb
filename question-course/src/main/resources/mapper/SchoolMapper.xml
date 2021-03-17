@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.SchoolMapper">
+    <resultMap id="SchoolMap" type="com.chris.question.course.pojo.School">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="content" column="content" />
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <collection property="gradeList" column="id"
+                    select="com.chris.question.course.dao.GradeMapper.getGradeListBySchoolId" />
+    </resultMap>
+
+    <insert id="insertSchool" parameterType="com.chris.question.course.pojo.School"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO school (name, content) VALUES (#{name},#{content})
+    </insert>
+
+    <delete id="deleteSchool" parameterType="Long">
+        UPDATE school SET del=0 WHERE id=#{id}
+    </delete>
+
+    <update id="updateSchool" parameterType="com.chris.question.course.pojo.School">
+        UPDATE school SET name=#{name},content=#{content}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getSchool" parameterType="Long" resultMap="SchoolMap">
+        SELECT * FROM school WHERE id=#{id} AND del=1
+    </select>
+
+    <select id="getSchoolList" resultMap="SchoolMap">
+        SELECT * FROM school WHERE del=1
+    </select>
+</mapper>

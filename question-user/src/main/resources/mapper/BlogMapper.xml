@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.user.dao.BlogMapper">
+    <resultMap id="BlogMap" type="com.chris.question.user.pojo.Blog">
+        <id property="id" column="id" />
+        <result property="content" column="content" />
+        <result property="userId" column="user_id" />
+        <result property="photo1" column="photo1" />
+        <result property="photo2" column="photo2" />
+        <result property="photo3" column="photo3" />
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <collection property="blogCommentList" column="id"
+                    select="com.chris.question.user.dao.BlogCommentMapper.getBlogCommentListByBlogId" />
+    </resultMap>
+
+    <insert id="insertBlog" parameterType="com.chris.question.user.pojo.Blog"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blog (content, photo1, photo2, photo3, user_id)
+        VALUES (#{content},#{photo1},#{photo2},#{photo3},#{userId})
+    </insert>
+
+    <delete id="deleteBlog" parameterType="Long">
+        UPDATE blog SET del=0 WHERE id=#{id}
+    </delete>
+
+    <update id="updateBlog" parameterType="com.chris.question.user.pojo.Blog">
+        UPDATE blog
+        SET content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getBlog" parameterType="Long" resultMap="BlogMap">
+        SELECT * FROM blog WHERE id=#{id} AND del=1
+    </select>
+
+    <select id="getBlogListByUserId" parameterType="String" resultMap="BlogMap">
+        SELECT * FROM blog WHERE user_id=#{userId} AND del=1
+    </select>
+
+</mapper>

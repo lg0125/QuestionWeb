@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.CommentMapper">
+    <resultMap id="CommentMap" type="com.chris.question.course.pojo.Comment">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="questionId" column="question_id" />
+
+        <result property="content" column="content"/>
+        <result property="photo1" column="photo1"/>
+        <result property="photo2" column="photo2"/>
+        <result property="photo3" column="photo3"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+    <insert id="insertComment" parameterType="com.chris.question.course.pojo.Comment"
+        useGeneratedKeys="true" keyProperty="commentId">
+        INSERT INTO comment (question_id,user_id, content,photo1,photo2,photo3)
+        VALUES (#{questionId},#{userId},#{content},#{photo1},#{photo2},#{photo3})
+    </insert>
+
+    <delete id="deleteComment" parameterType="Long">
+        UPDATE comment SET del=0
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateComment" parameterType="com.chris.question.course.pojo.Comment">
+        UPDATE comment
+        SET user_id=#{userId},content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getComment" parameterType="Long" resultMap="CommentMap">
+        SELECT * FROM comment WHERE id=#{id} and del=1
+    </select>
+
+    <select id="getCommentList" parameterType="Long" resultMap="CommentMap">
+        SELECT * FROM comment WHERE question_id=#{questionId} AND del=1
+    </select>
+</mapper>

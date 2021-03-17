@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chris.question.course.dao.NoticeMapper">
+    <resultMap id="NoticeMap" type="com.chris.question.course.pojo.Notice">
+        <id property="noticeId" column="notice_id"/>
+        <result property="content" column="content"/>
+        <result property="photo1" column="photo1"/>
+        <result property="photo2" column="photo2"/>
+        <result property="photo3" column="photo3"/>
+
+        <result property="del" column="del"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+
+        <association property="course" column="course_id"
+                     select="com.chris.question.course.dao.CourseMapper.getCourse" />
+    </resultMap>
+
+    <insert id="insertNotice" parameterType="com.chris.question.course.pojo.Notice"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notice (course_id,content,photo1,photo2,photo3)
+        VALUES (#{courseId},#{content},#{photo1},#{photo2},#{photo3})
+    </insert>
+
+    <delete id="deleteNotice" parameterType="Long">
+        UPDATE notice SET del=0 WHERE id=#{id}
+    </delete>
+
+    <update id="updateNotice" parameterType="com.chris.question.course.pojo.Notice">
+        UPDATE notice
+        SET course_id=#{courseId},content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getNotice" parameterType="Long" resultMap="NoticeMap">
+        SELECT * FROM notice WHERE id=#{id} AND del=1
+    </select>
+
+    <select id="getNoticeList" parameterType="String" resultMap="NoticeMap">
+        SELECT * FROM notice WHERE course_id=#{courseId}
+    </select>
+</mapper>

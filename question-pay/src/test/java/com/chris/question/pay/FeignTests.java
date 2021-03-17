@@ -1,13 +1,10 @@
-package com.chris.question.user;
+package com.chris.question.pay;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuestionUserApplicationTests {
-
+public class FeignTests {
     @Test
-    void contextLoads() {
-    }
-
+    public void test(){}
 }
