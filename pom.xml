@@ -15,6 +15,7 @@
         <module>question-gateway</module>
         <module>question-pay</module>
         <module>question-user</module>
+        <module>question-common</module>
     </modules>
 
 
