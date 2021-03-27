@@ -36,7 +36,7 @@ public class QuestionController {
     @PostMapping("/insertion")
     public R insertQuestion(@RequestBody Question question){
         int result = questionService.insertQuestion(question);
-        return R.ok();
+        return R.ok().put("questionId",question.getId());
     }
 
     @DeleteMapping("/deleting/{questionId}")

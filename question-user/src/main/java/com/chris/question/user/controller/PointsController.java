@@ -1,8 +1,10 @@
 package com.chris.question.user.controller;
 
 import com.chris.question.common.utils.R;
+import com.chris.question.user.dto.PointsDto;
 import com.chris.question.user.pojo.Points;
 import com.chris.question.user.service.PointsService;
+import com.chris.question.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ public class PointsController {
 
     @Autowired
     private PointsService pointsService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/insertion")
     public R insertPoints(@RequestBody Points points){
@@ -29,8 +33,20 @@ public class PointsController {
     }
 
     @PutMapping("/updating")
-    public R updatePoints(@RequestBody Points points){
-        int result = pointsService.updatePoints(points);
+    public R updatePoints(@RequestBody PointsDto points){
+        String userId = points.getUserId();
+        Long point = points.getPoints();
+        String type = points.getType();
+        Points userPoints = pointsService.getPoints(userId);
+
+        if(type.equals("add")){
+            userPoints.setPoints(userPoints.getPoints()+point);
+        }else{
+            userPoints.setPoints(userPoints.getPoints()-point);
+        }
+
+        pointsService.updatePoints(userPoints);
+
         return R.ok();
     }
 

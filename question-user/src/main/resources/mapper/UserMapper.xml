@@ -34,8 +34,8 @@
     </select>
 
     <insert id="insertUser" parameterType="com.chris.question.user.dto.UserDto">
-        INSERT INTO user (id, password, member_id, card_id)
-        VALUES (#{id},#{password},#{memberId},#{cardId})
+        INSERT INTO user (id, password)
+        VALUES (#{id},#{password})
     </insert>
 
     <update id="updateUser" parameterType="com.chris.question.user.dto.UserDto">

@@ -31,7 +31,7 @@ public class ActivityController {
 
     //TODO
     @PostMapping("/insertion")
-    public R insertActivity(Activity activity){
+    public R insertActivity(@RequestBody Activity activity){
         int result = activityService.insertActivity(activity);
         return R.ok();
     }

@@ -1,12 +1,11 @@
 package com.chris.question.user.controller;
 
-import com.chris.question.common.utils.PageRequest;
-import com.chris.question.common.utils.PageResult;
-import com.chris.question.common.utils.PageUtils;
+
 import com.chris.question.common.utils.R;
-import com.chris.question.user.dto.CardDto;
+
 import com.chris.question.user.dto.MemberDto;
 import com.chris.question.user.dto.QuestionDto;
+import com.chris.question.user.dto.UserDto;
 import com.chris.question.user.feign.CourseFeignService;
 import com.chris.question.user.feign.PayFeignService;
 import com.chris.question.user.pojo.*;
@@ -14,10 +13,9 @@ import com.chris.question.user.service.BlogService;
 import com.chris.question.user.service.InformationService;
 import com.chris.question.user.service.PointsService;
 import com.chris.question.user.service.UserService;
-import com.chris.question.user.vo.UserInformation;
+
 import com.chris.question.user.vo.UserTrace;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -94,7 +92,7 @@ public class UserController {
 
     //TODO
     @PostMapping("/login")
-    public R login(@RequestBody User user){
+    public R login(@RequestBody UserDto user) {
         String id = user.getId();
         String password = user.getPassword();
         User login = userService.getUser(id);
@@ -104,6 +102,18 @@ public class UserController {
             return R.ok().put("result","error");
         }
     }
+
+    //TODO
+    @PostMapping("/signup")
+    public R signUp(@RequestBody UserDto user){
+        try{
+            userService.insertUser(user);
+            return R.ok().put("result","success");
+        }catch (Exception e){
+            return R.ok().put("result","error");
+        }
+    }
+
 
     //TODO
     @GetMapping("/info/{userId}")

@@ -19,7 +19,7 @@
     </resultMap>
 
     <insert id="insertComment" parameterType="com.chris.question.course.pojo.Comment"
-        useGeneratedKeys="true" keyProperty="commentId">
+        useGeneratedKeys="true" keyProperty="id">
         INSERT INTO comment (question_id,user_id, content,photo1,photo2,photo3)
         VALUES (#{questionId},#{userId},#{content},#{photo1},#{photo2},#{photo3})
     </insert>

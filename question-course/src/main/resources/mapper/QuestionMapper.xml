@@ -53,7 +53,7 @@
 
     <update id="updateQuestion" parameterType="com.chris.question.course.pojo.Question">
         UPDATE question
-        SET course_id=#{courseId},user_id=#{userId},points=#{points},title=#{title},content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        SET course_id=#{courseId},user_id=#{userId},points=#{points},title=#{title},content=#{content}
         WHERE id=#{id}
     </update>
 
