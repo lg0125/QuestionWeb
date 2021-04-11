@@ -12,6 +12,7 @@ public class Blog {
     private Long id;
     private String content;
     private String userId;
+
     private String photo1;
     private String photo2;
     private String photo3;
@@ -22,4 +23,16 @@ public class Blog {
     private Timestamp modifyDate;
 
     private List<BlogComment> blogCommentList;
+
+    public Blog(){}
+    public Blog(Long id,String content){
+        this.id = id;
+        this.content = content;
+    }
+    public Blog(Long id,String photo1,String photo2,String photo3){
+        this.id = id;
+        this.photo1 = photo1;
+        this.photo2 = photo2;
+        this.photo3 = photo3;
+    }
 }

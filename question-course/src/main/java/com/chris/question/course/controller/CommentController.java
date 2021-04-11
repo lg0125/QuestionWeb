@@ -1,13 +1,20 @@
 package com.chris.question.course.controller;
 
+import com.chris.question.common.utils.FileResult;
 import com.chris.question.common.utils.PageRequest;
+import com.chris.question.common.utils.UploadUtils;
 import com.chris.question.course.pojo.Comment;
 import com.chris.question.course.service.CommentService;
 import com.chris.question.common.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController

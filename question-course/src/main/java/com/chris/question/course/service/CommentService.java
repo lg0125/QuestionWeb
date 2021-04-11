@@ -14,4 +14,5 @@ public interface CommentService {
     public Comment getComment(Long commentId);
     public List<Comment> getCommentList(Long questionId);
     public PageResult getCommentListPage(Long questionId, PageRequest pageRequest);
+    public int updatePics(Comment comment);
 }

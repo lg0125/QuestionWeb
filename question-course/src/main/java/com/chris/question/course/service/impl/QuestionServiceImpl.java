@@ -51,6 +51,11 @@ public class QuestionServiceImpl implements QuestionService {
         return PageUtils.getPageResult(pageRequest,getPageInfoByCourseId(courseId,pageRequest));
     }
 
+    @Override
+    public int updatePics(Question question) {
+        return questionMapper.updatePics(question);
+    }
+
     private PageInfo<Question> getPageInfoByCourseId(String courseId,PageRequest pageRequest){
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();

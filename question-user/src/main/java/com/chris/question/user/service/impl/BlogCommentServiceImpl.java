@@ -39,4 +39,9 @@ public class BlogCommentServiceImpl implements BlogCommentService {
     public List<BlogComment> getBlogCommentListByBlogId(Long blogId) {
         return blogCommentMapper.getBlogCommentListByBlogId(blogId);
     }
+
+    @Override
+    public int updatePics(BlogComment blogComment) {
+        return blogCommentMapper.updatePics(blogComment);
+    }
 }

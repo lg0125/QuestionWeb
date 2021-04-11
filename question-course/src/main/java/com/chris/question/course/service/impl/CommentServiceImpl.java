@@ -49,6 +49,11 @@ public class CommentServiceImpl implements CommentService {
         return PageUtils.getPageResult(pageRequest,getPageInfo(questionId,pageRequest));
     }
 
+    @Override
+    public int updatePics(Comment comment) {
+        return commentMapper.updatePics(comment);
+    }
+
     private PageInfo<Comment> getPageInfo(Long questionId, PageRequest pageRequest){
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();

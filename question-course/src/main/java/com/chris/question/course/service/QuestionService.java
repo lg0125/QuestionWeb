@@ -13,4 +13,5 @@ public interface QuestionService {
     public Question getQuestion(Long questionId);
     public List<Question> getQuestionListByCourseId(String courseId);
     public PageResult getQuestionListPageByCourseId(String courseId, PageRequest pageRequest);
+    public int updatePics(Question question);
 }

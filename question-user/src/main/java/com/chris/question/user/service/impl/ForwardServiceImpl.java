@@ -4,6 +4,7 @@ import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
 import com.chris.question.common.utils.PageUtils;
 import com.chris.question.user.dao.ForwardMapper;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.pojo.Forward;
 import com.chris.question.user.service.ForwardService;
 import com.github.pagehelper.PageHelper;
@@ -43,6 +44,11 @@ public class ForwardServiceImpl implements ForwardService {
     @Override
     public PageResult getForwardListPage(String userId, PageRequest pageRequest) {
         return PageUtils.getPageResult(pageRequest,getPageInfo(userId, pageRequest));
+    }
+
+    @Override
+    public int deleteForwardByIndex(IndexDto indexDto) {
+        return forwardMapper.deleteForwardByIndex(indexDto);
     }
 
     private PageInfo<Forward> getPageInfo(String userId, PageRequest pageRequest){

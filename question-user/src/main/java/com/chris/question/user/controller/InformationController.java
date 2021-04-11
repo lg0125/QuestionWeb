@@ -35,6 +35,6 @@ public class InformationController {
     }
 
     @GetMapping("/getting/{userId}")
-    public R getInformation(@PathVariable String userId){return R.ok().put("info",informationService.getInformation(userId));}
+    public R getInformation(@PathVariable String userId){return R.ok().put("userInfo",informationService.getInformation(userId));}
 
 }

@@ -3,6 +3,7 @@ package com.chris.question.user.controller;
 import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
 import com.chris.question.common.utils.R;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.dto.QuestionDto;
 import com.chris.question.user.feign.CourseFeignService;
 import com.chris.question.user.pojo.Activity;
@@ -72,4 +73,12 @@ public class ActivityController {
         result.setContent(questionList);
         return R.ok().put("result",result);
     }
+
+    @DeleteMapping("/del/{userId}/{questionId}")
+    public R deleteActivityByIndex(@PathVariable String userId,@PathVariable Long questionId){
+        IndexDto indexDto = new IndexDto(userId,questionId);
+        return R.ok().put("result",activityService.deleteActivityByIndex(indexDto));
+    }
+
+
 }

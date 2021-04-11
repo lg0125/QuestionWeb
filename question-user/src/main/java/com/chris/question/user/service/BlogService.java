@@ -14,4 +14,6 @@ public interface BlogService {
     public Blog getBlog(Long blogId);
     public List<Blog> getBlogListByUserId(String userId);
     public PageResult getBlogListPageByUserId(String userId, PageRequest pageRequest);
+    public int updatePics(Blog blog);
+    public PageResult getBlogList( PageRequest pageRequest);
 }

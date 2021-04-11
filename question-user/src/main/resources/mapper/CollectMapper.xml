@@ -33,4 +33,9 @@
         ORDER BY create_date DESC
     </select>
 
+    <delete id="deleteCollectByIndex" parameterType="com.chris.question.user.dto.IndexDto">
+        UPDATE collect SET del=0
+        WHERE question_id=#{questionId} AND user_id=#{userId}
+    </delete>
+
 </mapper>

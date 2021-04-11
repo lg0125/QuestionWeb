@@ -10,6 +10,7 @@
         <result property="work" column="work"/>
         <result property="name" column="name" />
         <result property="userId" column="user_id"/>
+        <result property="avatar" column="avatar" />
 
         <result property="del" column="del"/>
         <result property="version" column="version"/>
@@ -29,7 +30,7 @@
     </delete>
 
     <update id="updateInformation" parameterType="com.chris.question.user.pojo.Information">
-        UPDATE information SET sex=#{sex},province=#{province},work=#{work},city=#{city},name=#{name}
+        UPDATE information SET sex=#{sex},province=#{province},work=#{work},city=#{city},name=#{name},avatar=#{avatar}
         WHERE user_id=#{userId}
     </update>
 

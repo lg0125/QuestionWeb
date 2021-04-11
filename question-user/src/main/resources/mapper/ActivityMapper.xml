@@ -28,4 +28,9 @@
         WHERE user_id=#{userId} and del=1
         ORDER BY create_date DESC
     </select>
+
+    <delete id="deleteActivityByIndex" parameterType="com.chris.question.user.dto.IndexDto">
+        UPDATE activity SET del=0
+        WHERE question_id=#{questionId} AND user_id=#{userId}
+    </delete>
 </mapper>

@@ -6,7 +6,6 @@ import com.chris.question.user.service.BlogService;
 import com.chris.question.common.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigInteger;
 
 @CrossOrigin
 @RestController
@@ -48,6 +47,12 @@ public class BlogController {
     public R getBlogListPage(@PathVariable String userId,
                              @RequestBody PageRequest pageQuery)
     {
-        return R.ok().put("result",blogService.getBlogListPageByUserId(userId, pageQuery));
+        return R.ok().put("result", blogService.getBlogListPageByUserId(userId, pageQuery));
+    }
+
+    @PostMapping("/list/page")
+    public R getBlogArrayPage(@RequestBody PageRequest pageQuery)
+    {
+        return R.ok().put("result", blogService.getBlogList(pageQuery));
     }
 }

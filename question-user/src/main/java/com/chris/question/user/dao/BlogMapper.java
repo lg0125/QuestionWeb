@@ -11,4 +11,6 @@ public interface BlogMapper {
     public int updateBlog(Blog blog);
     public Blog getBlog(Long id);
     public List<Blog> getBlogListByUserId(String userId);
+    public int updatePics(Blog blog);
+    public List<Blog> getBlogList();
 }

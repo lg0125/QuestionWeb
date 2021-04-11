@@ -12,4 +12,5 @@ public interface BlogCommentMapper {
     public BlogComment getBlogComment(Long id);
 
     public List<BlogComment> getBlogCommentListByBlogId(Long blogId);
+    public int updatePics(BlogComment blogComment);
 }

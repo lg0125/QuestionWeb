@@ -2,6 +2,7 @@ package com.chris.question.user.service;
 
 import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.pojo.Activity;
 
 import java.math.BigInteger;
@@ -13,4 +14,5 @@ public interface ActivityService {
     public List<Activity> getActivityListByUserId(String userId);
 
     public PageResult getActivityListPage(String userId, PageRequest pageRequest);
+    public int deleteActivityByIndex(IndexDto indexDto);
 }

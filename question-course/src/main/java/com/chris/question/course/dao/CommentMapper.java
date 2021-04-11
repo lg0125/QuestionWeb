@@ -13,4 +13,5 @@ public interface CommentMapper {
     public int updateComment(Comment comment);
     public Comment getComment(Long id);
     public List<Comment> getCommentList(Long questionId);
+    public int updatePics(Comment comment);
 }

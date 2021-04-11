@@ -11,4 +11,5 @@ public interface BlogCommentService {
     public int updateComment(BlogComment blogComment);
     public BlogComment getBlogComment(Long blogCommentId);
     public List<BlogComment> getBlogCommentListByBlogId(Long blogId);
+    public int updatePics(BlogComment blogComment);
 }

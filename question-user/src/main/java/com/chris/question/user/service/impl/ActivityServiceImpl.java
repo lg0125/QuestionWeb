@@ -4,6 +4,7 @@ import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
 import com.chris.question.common.utils.PageUtils;
 import com.chris.question.user.dao.ActivityMapper;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.pojo.Activity;
 import com.chris.question.user.service.ActivityService;
 import com.github.pagehelper.PageHelper;
@@ -38,6 +39,11 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public PageResult getActivityListPage(String userId, PageRequest pageRequest) {
         return PageUtils.getPageResult(pageRequest,getPageInfo(userId,pageRequest));
+    }
+
+    @Override
+    public int deleteActivityByIndex(IndexDto indexDto) {
+        return activityMapper.deleteActivityByIndex(indexDto);
     }
 
     private PageInfo<Activity> getPageInfo(String userId, PageRequest pageRequest){

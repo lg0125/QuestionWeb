@@ -31,7 +31,13 @@
 
     <update id="updateComment" parameterType="com.chris.question.course.pojo.Comment">
         UPDATE comment
-        SET user_id=#{userId},content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        SET content=#{content},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
+        WHERE id=#{id}
+    </update>
+
+    <update id="updatePics" parameterType="com.chris.question.course.pojo.Comment">
+        UPDATE comment
+        SET photo1=#{photo1},photo2=#{photo2},photo3=#{photo3}
         WHERE id=#{id}
     </update>
 

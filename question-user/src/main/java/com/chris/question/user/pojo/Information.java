@@ -15,6 +15,7 @@ public class Information {
     private String city;
     private String province;
     private String work;
+    private String avatar;
 
     private String userId;
 

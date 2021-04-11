@@ -32,4 +32,9 @@
         ORDER BY create_date DESC
     </select>
 
+    <delete id="deleteForwardByIndex" parameterType="com.chris.question.user.dto.IndexDto">
+        UPDATE forward SET del=0
+        WHERE question_id=#{questionId} AND user_id=#{userId}
+    </delete>
+
 </mapper>

@@ -7,6 +7,9 @@
         <result property="blogId" column="blog_id" />
         <result property="userId" column="user_id" />
         <result property="content" column="content" />
+        <result property="photo1" column="photo1" />
+        <result property="photo2" column="photo2" />
+        <result property="photo3" column="photo3" />
 
         <result property="del" column="del"/>
         <result property="version" column="version"/>
@@ -26,7 +29,23 @@
 
     <update id="updateBlogComment" parameterType="com.chris.question.user.pojo.BlogComment">
         UPDATE blogcomment
-        SET blog_id=#{blogId},content=#{content}
+        SET content=#{content}
+        WHERE id=#{id}
+    </update>
+
+    <update id="updatePics" parameterType="com.chris.question.user.pojo.BlogComment">
+        UPDATE blogcomment
+        <set>
+            <if test="photo1 != null">
+                photo1=#{photo1},
+            </if>
+            <if test="photo2 != null">
+                photo2=#{photo2},
+            </if>
+            <if test="photo3 != null">
+                photo3=#{photo3}
+            </if>
+        </set>
         WHERE id=#{id}
     </update>
 

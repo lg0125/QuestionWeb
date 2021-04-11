@@ -32,4 +32,18 @@ public class Question implements Serializable {
     private Integer version;
     private Timestamp createDate;
     private Timestamp modifyDate;
+
+    public Question(){}
+    public Question(Long id,Long points,String title,String content){
+        this.id = id;
+        this.points = points;
+        this.title = title;
+        this.content = content;
+    }
+    public Question(Long id,String photo1,String photo2,String photo3){
+        this.id = id;
+        this.photo1 = photo1;
+        this.photo2 = photo2;
+        this.photo3 = photo3;
+    }
 }

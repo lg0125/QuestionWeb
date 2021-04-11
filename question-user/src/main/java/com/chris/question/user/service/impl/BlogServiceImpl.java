@@ -50,6 +50,20 @@ public class BlogServiceImpl implements BlogService {
         return PageUtils.getPageResult(pageRequest,getPageInfoByUserId(userId, pageRequest));
     }
 
+    @Override
+    public int updatePics(Blog blog) {
+        return blogMapper.updatePics(blog);
+    }
+
+    @Override
+    public PageResult getBlogList(PageRequest pageRequest) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Blog> listByPage = blogMapper.getBlogList();
+        return PageUtils.getPageResult(pageRequest,new PageInfo<>(listByPage));
+    }
+
     private PageInfo<Blog> getPageInfoByUserId(String userId,PageRequest pageRequest){
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();

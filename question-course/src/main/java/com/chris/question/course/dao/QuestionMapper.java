@@ -13,4 +13,5 @@ public interface QuestionMapper {
     public int updateQuestion(Question question);
     public Question getQuestion(Long id);
     public List<Question> getQuestionListByCourseId(String courseId);
+    public int updatePics(Question question);
 }

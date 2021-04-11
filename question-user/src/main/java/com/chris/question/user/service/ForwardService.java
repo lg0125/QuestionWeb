@@ -2,6 +2,7 @@ package com.chris.question.user.service;
 
 import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.pojo.Forward;
 
 import java.math.BigInteger;
@@ -13,4 +14,5 @@ public interface ForwardService {
     public Forward getForward(Long forwardId);
     public List<Forward> getForwardListByUserId(String userId);
     public PageResult getForwardListPage(String userId, PageRequest pageRequest);
+    public int deleteForwardByIndex(IndexDto indexDto);
 }

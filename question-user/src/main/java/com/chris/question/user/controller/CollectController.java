@@ -3,6 +3,7 @@ package com.chris.question.user.controller;
 import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
 import com.chris.question.common.utils.R;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.dto.QuestionDto;
 import com.chris.question.user.feign.CourseFeignService;
 import com.chris.question.user.pojo.Activity;
@@ -81,6 +82,12 @@ public class CollectController {
         List<QuestionDto> list = (List<QuestionDto>) courseFeignService.getQuestionList(collectIndexList).get("questionList");
         result.setContent(list);
         return R.ok().put("result",result);
+    }
+
+    @DeleteMapping("/del/{userId}/{questionId}")
+    public R deleteCollectByIndex(@PathVariable String userId,@PathVariable Long questionId){
+        IndexDto indexDto = new IndexDto(userId,questionId);
+        return R.ok().put("result",collectService.deleteCollectByIndex(indexDto));
     }
 
 }

@@ -4,6 +4,7 @@ import com.chris.question.common.utils.PageRequest;
 import com.chris.question.common.utils.PageResult;
 import com.chris.question.common.utils.PageUtils;
 import com.chris.question.user.dao.CollectMapper;
+import com.chris.question.user.dto.IndexDto;
 import com.chris.question.user.pojo.Collect;
 import com.chris.question.user.service.CollectService;
 import com.github.pagehelper.PageHelper;
@@ -43,6 +44,11 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public PageResult getCollectListPageByUserId(String userId, PageRequest pageRequest) {
         return PageUtils.getPageResult(pageRequest,getPageInfo(userId,pageRequest));
+    }
+
+    @Override
+    public int deleteCollectByIndex(IndexDto indexDto) {
+        return collectMapper.deleteCollectByIndex(indexDto);
     }
 
     private PageInfo<Collect> getPageInfo(String userId, PageRequest pageRequest){
